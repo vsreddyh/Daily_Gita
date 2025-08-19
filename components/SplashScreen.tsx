@@ -6,8 +6,8 @@ const { width, height } = Dimensions.get("window");
 export default function SplashScreen() {
   const opacity = useRef(new Animated.Value(1)).current;
   const viewHeight = useRef(new Animated.Value(0.15)).current;
-  const left = useRef(new Animated.Value(0.24)).current;
-  const top = useRef(new Animated.Value(0.1)).current;
+  const left = useRef(new Animated.Value(0.2)).current;
+  const top = useRef(new Animated.Value(0.25)).current;
   const fontSize = useRef(new Animated.Value(0.04)).current;
 
   useEffect(() => {
@@ -25,12 +25,12 @@ export default function SplashScreen() {
           useNativeDriver: false,
         }),
         Animated.timing(left, {
-          toValue: 0.097,
+          toValue: 0.095,
           duration: 2000,
           useNativeDriver: false,
         }),
         Animated.timing(top, {
-          toValue: 0.9,
+          toValue: 0.8,
           duration: 2000,
           useNativeDriver: false,
         }),
