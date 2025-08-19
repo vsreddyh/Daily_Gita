@@ -3,39 +3,39 @@ import { useEffect, useRef } from "react";
 
 const { width, height } = Dimensions.get("window");
 
-export default function SplashScreen() {
-  const opacity = useRef(new Animated.Value(1)).current;
-  const viewHeight = useRef(new Animated.Value(0.15)).current;
-  const left = useRef(new Animated.Value(0.24)).current;
-  const top = useRef(new Animated.Value(0.1)).current;
-  const fontSize = useRef(new Animated.Value(0.04)).current;
+export default function SplashScreen2() {
+  const opacity = useRef(new Animated.Value(0)).current;
+  const viewHeight = useRef(new Animated.Value(0.168)).current;
+  const left = useRef(new Animated.Value(0.097)).current;
+  const top = useRef(new Animated.Value(0.9)).current;
+  const fontSize = useRef(new Animated.Value(0.06)).current;
 
   useEffect(() => {
     const anim = Animated.sequence([
       Animated.delay(2000),
       Animated.parallel([
         Animated.timing(opacity, {
-          toValue: 0,
+          toValue: 1,
           duration: 2000,
           useNativeDriver: true,
         }),
         Animated.timing(viewHeight, {
-          toValue: 0.168,
+          toValue: 0.15,
           duration: 2000,
           useNativeDriver: false,
         }),
         Animated.timing(left, {
-          toValue: 0.097,
+          toValue: 0.24,
           duration: 2000,
           useNativeDriver: false,
         }),
         Animated.timing(top, {
-          toValue: 0.9,
+          toValue: 0.1,
           duration: 2000,
           useNativeDriver: false,
         }),
         Animated.timing(fontSize, {
-          toValue: 0.06,
+          toValue: 0.04,
           duration: 2000,
           useNativeDriver: false,
         }),
