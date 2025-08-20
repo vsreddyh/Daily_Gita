@@ -2,6 +2,16 @@
 	"extends": "expo/tsconfig.base",
 	"compilerOptions": {
 		"jsx": "react-jsx",
+		"lib": [
+			"dom",
+			"dom.iterable",
+			"esnext"
+		],
+		"types": [
+			"react",
+			"react-dom"
+		],
+		"noImplicitAny": true,
 		"strict": true,
 		"paths": {
 			"@/*": [
@@ -15,5 +25,10 @@
 		".expo/types/**/*.ts",
 		"expo-env.d.ts",
 		"nativewind-env.d.ts"
+	],
+	"exclude": [
+		"node_modules",
+		"dist",
+		"build"
 	]
 }

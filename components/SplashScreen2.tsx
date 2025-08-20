@@ -1,47 +1,50 @@
-import { View, Animated, Dimensions } from "react-native";
+import { View, Animated, Dimensions, ImageSourcePropType } from "react-native";
 import { useEffect, useRef } from "react";
+import { SplashScreenProps } from "./../types/customTypes";
 
 const { width, height } = Dimensions.get("window");
 
-export default function SplashScreen2() {
-  const opacity = useRef(new Animated.Value(0)).current;
-  const viewHeight = useRef(new Animated.Value(0.25)).current;
-  const viewWidth = useRef(new Animated.Value(0.5)).current;
-  const left = useRef(new Animated.Value(0.23)).current;
-  const top = useRef(new Animated.Value(0.4)).current;
-  const fontSize = useRef(new Animated.Value(0.06)).current;
+export default function SplashScreen2({
+  setAnimating,
+}: SplashScreenProps): React.JSX.Element {
+  const opacity: Animated.Value = useRef(new Animated.Value(1)).current;
+  const viewHeight: Animated.Value = useRef(new Animated.Value(0.15)).current;
+  const viewWidth: Animated.Value = useRef(new Animated.Value(0.3)).current;
+  const left: Animated.Value = useRef(new Animated.Value(0.55)).current;
+  const top: Animated.Value = useRef(new Animated.Value(0.085)).current;
+  const fontSize: Animated.Value = useRef(new Animated.Value(0.04)).current;
 
   useEffect(() => {
-    const anim = Animated.sequence([
+    const anim: Animated.CompositeAnimation = Animated.sequence([
       Animated.delay(2000),
       Animated.parallel([
         Animated.timing(opacity, {
-          toValue: 1,
+          toValue: 0,
           duration: 2000,
           useNativeDriver: true,
         }),
         Animated.timing(viewHeight, {
-          toValue: 0.15,
+          toValue: 0.25,
           duration: 2000,
           useNativeDriver: false,
         }),
         Animated.timing(viewWidth, {
-          toValue: 0.3,
+          toValue: 0.5,
           duration: 2000,
           useNativeDriver: false,
         }),
         Animated.timing(left, {
-          toValue: 0.55,
+          toValue: 0.23,
           duration: 2000,
           useNativeDriver: false,
         }),
         Animated.timing(top, {
-          toValue: 0.085,
+          toValue: 0.4,
           duration: 2000,
           useNativeDriver: false,
         }),
         Animated.timing(fontSize, {
-          toValue: 0.04,
+          toValue: 0.06,
           duration: 2000,
           useNativeDriver: false,
         }),
@@ -56,7 +59,7 @@ export default function SplashScreen2() {
   return (
     <View className="w-full h-full bg-[#001F3F]">
       <Animated.Image
-        source={require("../assets/images/BG.jpg")}
+        source={require("../assets/images/BG.jpg") as ImageSourcePropType}
         className="w-full h-full"
         resizeMode="stretch"
         style={{ opacity: opacity }}
@@ -64,8 +67,8 @@ export default function SplashScreen2() {
       <Animated.View
         className="absolute flex justify-evenly items-center"
         style={{
-          height: height * viewHeight,
-          width: width * viewWidth,
+          height: Animated.multiply(height, viewHeight),
+          width: Animated.multiply(width, viewWidth),
           transform: [
             { translateX: Animated.multiply(width, left) },
             { translateY: Animated.multiply(height, top) },
