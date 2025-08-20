@@ -5,9 +5,10 @@ const { width, height } = Dimensions.get("window");
 
 export default function SplashScreen2() {
   const opacity = useRef(new Animated.Value(0)).current;
-  const viewHeight = useRef(new Animated.Value(0.168)).current;
-  const left = useRef(new Animated.Value(0.095)).current;
-  const top = useRef(new Animated.Value(0.8)).current;
+  const viewHeight = useRef(new Animated.Value(0.25)).current;
+  const viewWidth = useRef(new Animated.Value(0.5)).current;
+  const left = useRef(new Animated.Value(0.23)).current;
+  const top = useRef(new Animated.Value(0.4)).current;
   const fontSize = useRef(new Animated.Value(0.06)).current;
 
   useEffect(() => {
@@ -24,13 +25,18 @@ export default function SplashScreen2() {
           duration: 2000,
           useNativeDriver: false,
         }),
+        Animated.timing(viewWidth, {
+          toValue: 0.3,
+          duration: 2000,
+          useNativeDriver: false,
+        }),
         Animated.timing(left, {
-          toValue: 0.2,
+          toValue: 0.55,
           duration: 2000,
           useNativeDriver: false,
         }),
         Animated.timing(top, {
-          toValue: 0.25,
+          toValue: 0.085,
           duration: 2000,
           useNativeDriver: false,
         }),
@@ -46,9 +52,9 @@ export default function SplashScreen2() {
     anim.start(() => {
       console.log("HEll");
     });
-  }, [opacity, viewHeight, left, top, fontSize]);
+  }, [opacity, viewHeight, viewWidth, left, top, fontSize]);
   return (
-    <View className="w-screen h-screen bg-[#001F3F]">
+    <View className="w-full h-full bg-[#001F3F]">
       <Animated.Image
         source={require("../assets/images/BG.jpg")}
         className="w-full h-full"
@@ -59,9 +65,10 @@ export default function SplashScreen2() {
         className="absolute flex justify-evenly items-center"
         style={{
           height: height * viewHeight,
+          width: width * viewWidth,
           transform: [
-            { translateX: Animated.multiply(height, left) },
-            { translateY: Animated.multiply(width, top) },
+            { translateX: Animated.multiply(width, left) },
+            { translateY: Animated.multiply(height, top) },
           ],
         }}
       >
