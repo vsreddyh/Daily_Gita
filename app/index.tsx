@@ -1,18 +1,21 @@
-import React from "react";
-import { Text, View } from "react-native";
+import { React } from "react";
+import { ScrollView, View, Button } from "react-native";
+import { useNavigation } from "expo-router";
+import { DrawerActions } from "@react-navigation/native";
+export default function Home(): React.JSX.Element {
+  const navigation = useNavigation();
 
-export default function Index(): React.JSX.Element {
+  const openDrawer: null = () => {
+    navigation.dispatch(DrawerActions.openDrawer());
+  };
+
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
+    <ScrollView
+      contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
     >
-      <Text className="bg-green-300">
-        Edit app/index.tsx to edit this screen.
-      </Text>
-    </View>
+      <View className="w-full items-center h-full bg-[#001F3F] pt-32">
+        <Button title="Open Drawer" onPress={openDrawer} />
+      </View>
+    </ScrollView>
   );
 }
