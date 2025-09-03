@@ -115,7 +115,7 @@ function CustomDrawerContent(
         }}
       />
       <DrawerItem
-        label="Feedback"
+        label="Feedback & Support"
         icon={() => (
           <MaterialIcons
             name="feedback"

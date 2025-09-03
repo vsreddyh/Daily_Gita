@@ -1,24 +1,25 @@
-import { React } from "react";
+import { React, useState } from "react";
 import {
   ScrollView,
-  TextInput,
+  Pressable,
+  Image,
   View,
   Text,
-  Image,
-  Pressable,
-  ImageSourcePropType,
   Dimensions,
+  ImageSourcePropType,
 } from "react-native";
 import { useNavigation } from "expo-router";
 import { DrawerActions } from "@react-navigation/native";
 import { NavigationProp } from "./../types/customTypes.ts";
+import { Picker } from "@react-native-picker/picker";
 
 const { height } = Dimensions.get("window");
 
 export default function History(): React.JSX.Element {
   const navigation = useNavigation<NavigationProp>();
+  const [language, setLanguage] = useState<string>("en");
 
-  const openDrawer: null = () => {
+  const openDrawer = () => {
     navigation.dispatch(DrawerActions.openDrawer());
   };
 
@@ -33,53 +34,51 @@ export default function History(): React.JSX.Element {
             onPress={openDrawer}
           >
             <Image
-              style={{
-                width: height * 0.05,
-                height: height * 0.05,
-              }}
+              style={{ width: height * 0.05, height: height * 0.05 }}
               source={
                 require("./../assets/images/menu.png") as ImageSourcePropType
               }
-              onPress={openDrawer}
             />
           </Pressable>
+
           <Text
             className="color-[#B7BA00] h-fit"
             style={{ fontSize: height * 0.04 }}
           >
             Settings
           </Text>
+
           <View
             className="w-fit h-full flex justify-center items-center "
-            style={{
-              width: height * 0.05,
-              height: height * 0.05,
-            }}
-          ></View>
+            style={{ width: height * 0.05, height: height * 0.05 }}
+          />
         </View>
-        <View className="w-[90%] flex items-center">
-          <View className="flex w-full">
-            <Text
-              className="color-[#B7BA00] pb-3"
-              style={{ fontSize: height * 0.025 }}
-            >
-              13/08/25
-            </Text>
-          </View>
-          <View className="w-[90%] flex-row justify-between items-center">
-            <Text
-              className="color-[#B7BA00] pb-1"
-              style={{ fontSize: height * 0.025 }}
-            >
-              14:20
-            </Text>
-            <Text
-              className="color-[#B7BA00] pb-1"
-              style={{ fontSize: height * 0.025 }}
-            >
-              Chapter 2 Verse 11
-            </Text>
-          </View>
+
+        <View
+          className="w-[90%]"
+          style={{ flexDirection: "row", alignItems: "center" }}
+        >
+          <Text
+            className="flex-1 color-[#B7BA00]"
+            style={{ fontSize: height * 0.02 }}
+          >
+            Language
+          </Text>
+          <Picker
+            style={{
+              flex: 1,
+              color: "#B7BA00",
+              backgroundColor: "#001F3F",
+              fontSize: height * 0.02,
+            }}
+            dropdownIconColor="#B7BA00"
+            selectedValue={language}
+            onValueChange={(val) => setLanguage(val)}
+          >
+            <Picker.Item label="English" value="en" />
+            <Picker.Item label="Hindi" value="hi" />
+            <Picker.Item label="Telugu" value="te" />
+          </Picker>
         </View>
       </View>
     </ScrollView>
