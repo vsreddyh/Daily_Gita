@@ -6,6 +6,7 @@ import Octicons from "@expo/vector-icons/Octicons";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { StatusBar } from "expo-status-bar";
+import { SQLiteProvider, useSQLiteContext } from "expo-sqlite";
 //import SplashScreen from "../components/SplashScreen";
 //import { useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -19,17 +20,22 @@ const { height, width } = Dimensions.get("window");
 
 export default function RootLayout(): React.JSX.Element {
   return (
-    <GestureHandlerRootView>
-      <StatusBar style="light" />
-      <Drawer
-        screenOptions={{
-          headerShown: false,
-        }}
-        drawerContent={(props: DrawerContentComponentProps) => (
-          <CustomDrawerContent {...props} />
-        )}
-      ></Drawer>
-    </GestureHandlerRootView>
+    <SQLiteProvider
+      databaseName="gita.db"
+      assetSource={{ assetId: require("./../assets/gita.db") }}
+    >
+      <GestureHandlerRootView>
+        <StatusBar style="light" />
+        <Drawer
+          screenOptions={{
+            headerShown: false,
+          }}
+          drawerContent={(props: DrawerContentComponentProps) => (
+            <CustomDrawerContent {...props} />
+          )}
+        ></Drawer>
+      </GestureHandlerRootView>
+    </SQLiteProvider>
   );
   /*const [animating, setAnimating] = useState<boolean>(true);
   return animating ? <SplashScreen setAnimating={setAnimating} /> : <Stack />;*/
