@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useEffect } from "react";
 import {
   ScrollView,
   TextInput,
@@ -12,6 +12,7 @@ import {
 import { useNavigation } from "expo-router";
 import { DrawerActions } from "@react-navigation/native";
 import { NavigationProp } from "./../types/customTypes.ts";
+import { useDB } from "./../components/SQLite.tsx";
 
 const { height, width } = Dimensions.get("window");
 
@@ -21,6 +22,15 @@ export default function Home(): React.JSX.Element {
   const openDrawer: null = () => {
     navigation.dispatch(DrawerActions.openDrawer());
   };
+  const { getVerse } = useDB();
+
+  useEffect(() => {
+    async function getFirst() {
+      const firstRow = await getVerse();
+      console.log(firstRow);
+    }
+    getFirst();
+  }, []);
 
   return (
     <ScrollView
